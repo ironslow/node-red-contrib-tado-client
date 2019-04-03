@@ -6,7 +6,10 @@
             "home-id": "Home ID",
             "device-id": "Device ID",
             "zone-id": "Zone ID",
-            "power": "Heating On/Off",
+            "type": "System Type",
+            "power": "On/Off",
+            "mode": "Mode",
+            "fanspeed": "Fan Speed",
             "temperature": "Temperature (C)",
             "termination-type": "Type of Termination",
             "termination-timeout": "Termination Timeout (secs)"
@@ -31,8 +34,17 @@
             "manual": "Manual termination",
             "auto": "Tado schedule termination",
             "timer": "Timer based termination",
-            "on": "Heating On",
-            "off": "Heating Off"
+            "on": "On",
+            "off": "Off",
+            "air-conditionner": "Air Conditionner",
+            "heater": "Heater",
+            "cool": "Cool",
+            "dry": "Dry",
+            "fan": "Fan",
+            "heat": "Heat",
+            "low": "Low",
+            "middle": "Middle",
+            "high": "High"
         }
     }
 }

@@ -31,6 +31,9 @@ module.exports = function(RED) {
         this.deviceId = n.deviceId;
         this.zoneId = n.zoneId;
         this.power = n.power;
+        this.systemType = n.systemType;
+        this.mode = n.mode;
+        this.fanSpeed = n.fanSpeed;
         this.temperature = n.temperature;
         this.terminationType = n.terminationType;
         this.terminationTimeout = n.terminationTimeout;
@@ -53,6 +56,9 @@ module.exports = function(RED) {
                         var deviceId = msg.hasOwnProperty("deviceId") ? msg.deviceId : node.deviceId;
                         var zoneId = msg.hasOwnProperty("zoneId") ? msg.zoneId : node.zoneId;
                         var power = msg.hasOwnProperty("power") ? msg.power : node.power;
+                        var systemType = msg.hasOwnProperty("systemType") ? msg.systemType : node.systemType;
+                        var mode = msg.hasOwnProperty("mode") ? msg.mode : node.mode;
+                        var fanSpeed = msg.hasOwnProperty("fanSpeed") ? msg.fanSpeed : node.fanSpeed;
                         var temperature = msg.hasOwnProperty("temperature") ? msg.temperature : node.temperature;
                         var terminationType = msg.hasOwnProperty("terminationType") ? msg.terminationType : node.terminationType;
                         var terminationTimeout = msg.hasOwnProperty("terminationTimout") ? msg.terminationTimout : node.terminationTimeout;
@@ -71,6 +77,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getMe");
                                 });
 
                                 break;
@@ -82,6 +89,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getHome");
                                 });
 
                                 break;
@@ -93,6 +101,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getWeather");
                                 });
 
                                 break;
@@ -104,6 +113,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getDevices");
                                 });
 
                                 break;
@@ -115,6 +125,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getInstallations");
                                 });
 
                                 break;
@@ -126,6 +137,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getUsers");
                                 });
 
                                 break;
@@ -137,6 +149,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getMobileDevices");
                                 });
 
                                 break;
@@ -148,6 +161,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getMobileDevice");
                                 });
 
                                 break;
@@ -159,6 +173,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getMobileDeviceSettings");
                                 });
 
                                 break;
@@ -170,6 +185,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getZones");
                                 });
 
                                 break;
@@ -181,6 +197,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getZoneState");
                                 });
 
                                 break;
@@ -192,6 +209,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error getZoneCapabilities");
                                 });
 
                                 break;
@@ -209,6 +227,7 @@ module.exports = function(RED) {
                                         node.status({ fill: "red", shape: "ring", text: "errored" });
                                         node.error(err);
                                     }
+                                    console.log("error getZoneOverlay");
                                 });
 
                                 break;
@@ -220,6 +239,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error clearZoneOverlay");
                                 });
 
                                 break;
@@ -229,13 +249,14 @@ module.exports = function(RED) {
                                     termination = terminationTimeout;
                                 }
 
-                                tado.setZoneOverlay(homeId, zoneId, power, temperature, termination).then(function(resp) {
+                                tado.setZoneOverlay(homeId, zoneId, power, systemType, mode, fanSpeed, temperature, termination).then(function(resp) {
                                     node.status({ fill: "green", shape: "dot", text: apiCall });
                                     new_msg.payload = resp;
                                     node.send(new_msg);
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error setZoneOverlay");
                                 });
 
                                 break;
@@ -247,6 +268,7 @@ module.exports = function(RED) {
                                 }).catch(function(err) {
                                     node.status({ fill: "red", shape: "ring", text: "errored" });
                                     node.error(err);
+                                    console.log("error identifyDevice");
                                 });
 
                                 break;
@@ -256,10 +278,12 @@ module.exports = function(RED) {
                 .catch(function(err) {
                     node.status({ fill: "red", shape: "ring", text: "errored" });
                     node.error(err);
+                    console.log("error login");
                 });
         } else {
             node.status({ fill: "grey", shape: "ring", text: "unconfigured" });
             this.error(RED._("tado.errors.missingconfig"));
+            console.log("error missingConfig");
         }
     }
 

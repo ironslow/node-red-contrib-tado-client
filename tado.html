@@ -77,6 +77,30 @@
             </select>
         </div>
         <div id="tadoPowerForm">
+            <div class="form-row" id="tadoSystemType">
+                <label for="node-input-systemType"><i class="fa fa-cogs"></i> <span data-i18n="tado.label.type"></span></label>
+                <select id="node-input-systemType" style="width:60%; margin-right:5px;">
+                    <option value="AIR_CONDITIONING" data-i18n="tado.option.air-conditionner"></option>
+                    <option value="HEATING" data-i18n="tado.option.heater"></option>
+                </select>
+            </div>
+            <div class="form-row" id="tadoMode">
+                <label for="node-input-mode"><i class="fa fa-list-ul"></i> <span data-i18n="tado.label.mode"></span></label>
+                <select id="node-input-mode" style="width:60%; margin-right:5px;">
+                    <option value="COOL" data-i18n="tado.option.cool"></option>
+                    <option value="DRY" data-i18n="tado.option.dry"></option>
+                    <option value="FAN" data-i18n="tado.option.fan"></option>
+                    <option value="HEAT" data-i18n="tado.option.heat"></option>
+                </select>
+            </div>
+            <div class="form-row" id="tadoFanSpeed">
+                <label for="node-input-fanSpeed"><i class="fa fa-fast-forward"></i> <span data-i18n="tado.label.fanspeed"></span></label>
+                <select id="node-input-fanSpeed" style="width:60%; margin-right:5px;">
+                    <option value="LOW" data-i18n="tado.option.low"></option>
+                    <option value="MIDDLE" data-i18n="tado.option.middle"></option>
+                    <option value="HIGH" data-i18n="tado.option.high"></option>
+                </select>
+            </div>
             <div class="form-row" id="tadoTemperature">
                 <label for="node-input-temperature"><i class="fa fa-thermometer-half"></i> <span data-i18n="tado.label.temperature"></span></label>
                 <input type="text" id="node-input-temperature" data-i18n="[placeholder]tado.label.temperature">
@@ -118,8 +142,17 @@
         <dt class="optional">zoneId <span class="property-type">string</span></dt>
         <dd> the zone ID to target</dd>
 
+        <dt class="optional">type <span class="property-type">string</span></dt>
+        <dd> the type of the system (Air conditioning or Heating)</dd>
+
+        <dt class="optional">mode <span class="property-type">string</span></dt>
+        <dd> the mode of the system (Cool, Dry, Fan or Heat)</dd>
+
+        <dt class="optional">fanspeed <span class="property-type">string</span></dt>
+        <dd> the speed of the fan (Low, Middle or High)</dd>
+
         <dt class="optional">power <span class="property-type">string</span></dt>
-        <dd> turn the heating system on or off</dd>
+        <dd> turn the system on or off</dd>
 
         <dt class="optional">temperature <span class="property-type">string</span></dt>
         <dd> the target temperature</dd>
@@ -160,6 +193,9 @@
             homeId: {value: ""},
             deviceId: {value: ""},
             zoneId: {value: ""},
+            systemType: {value: ""},
+            mode: {value: ""},
+            fanSpeed: {value: ""},
             power: {value: "on"},
             temperature: {value: "18"},
             terminationType: {value: "manual"},
@@ -173,7 +209,7 @@
             return this.name || "Tado";
         },
         labelStyle: function() {
-            return this.name ? "node_label_italic" : ""; 
+            return this.name ? "node_label_italic" : "";
         },
         oneditprepare: function() {
             $('#node-input-apiCall').change(function() {
